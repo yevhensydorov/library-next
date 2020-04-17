@@ -1,18 +1,22 @@
-import Link from 'next/link'
+import styled from 'styled-components';
 
-const linkStyle = {
-    marginRight: 15
-}
+import LinkItem from './LinkItem';
+import Navbar from "./Navbar";
+import UploadButton from "./UploadButton";
 
 export default function Header() {
     return (
-        <div>
-            <Link href="/">
-                <a style={linkStyle}>Home</a>
-            </Link>
-            <Link href="/about">
-                <a style={linkStyle}>About</a>
-            </Link>
-        </div>
+        <StyledHeader>
+            <LinkItem href="/" linkText="CYF Library" isLogo={true} />
+            <Navbar />
+            <UploadButton />
+        </StyledHeader>
     );
 }
+
+const StyledHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: ${({ theme }) => theme.colors.primary};
+`;
