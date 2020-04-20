@@ -2,25 +2,24 @@ import Link from "next/link";
 import styled from 'styled-components';
 
 
-const LinkItem = ({ href, linkText, isLogo }) => (
-    <StyledLinkItemContainer>
-        <Link href={href} passHref>
-            <StyledLinkItem isLogo={isLogo}>{linkText}</StyledLinkItem>
-        </Link>
-    </StyledLinkItemContainer>
+const LinkItem = ({ href, linkText, isDropdownItem }) => (
+    <Link href={href} passHref>
+        <StyledLinkItem isDropdownItem={isDropdownItem}>{linkText}</StyledLinkItem>
+    </Link>
 );
 
-const StyledLinkItemContainer = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
 const StyledLinkItem = styled.a`
+    display: inline-block;
+    padding: ${props => props.isDropdownItem ? "8px 16px" : "16px 0"};
     text-decoration: none;
     color: ${({ theme }) => theme.colors.contrast};
-    opacity: ${props => props.isLogo ? 1 : .65};
+    opacity: .65;
     
     &:hover {
+        opacity: 1;
+    }
+    
+    &:focus {
         opacity: 1;
     }
 `;
