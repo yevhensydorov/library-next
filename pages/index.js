@@ -18,7 +18,7 @@ const Index = () => {
     return (
         <Layout>
             <MainContentContainer>
-                <SectionLayout bcg="green">
+                <SectionLayout bcg="aquamarine">
                     <h1>Welcome to Code Your Future Library of content</h1>
                 </SectionLayout>
                 { renderCategoriesSections }
