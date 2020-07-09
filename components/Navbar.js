@@ -1,36 +1,42 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { useContext } from "react";
 
-import { CATEGORIES } from "../constants/dataContants";
-import LinkItem from './LinkItem';
+import CategoriesContext from "../contexts/CategoriesContext";
+import LinkItem from "./LinkItem";
 import DropdownButton from "./DropdownButton";
 
 const Navbar = () => {
-    const dropDownCategories = [];
+  const { categories } = useContext(CategoriesContext);
 
-    const categoriesList = CATEGORIES.map((category, index) => {
-        if (index < 6) {
-            return (
-                <NavbarItem key={category.category_name}>
-                    <LinkItem href={`/${category.category_name}`} linkText={category.category_name} />
-                </NavbarItem>
-            );
-        } else {
-            dropDownCategories.push(category);
-        }
-    });
+  const dropDownCategories = [];
 
-    return (
-        <StyledNavbar>
-            { categoriesList }
-            <NavbarItem isDropdown>
-                <DropdownButton
-                    dropdownText="More"
-                    dropDownCategories={dropDownCategories}
-                />
-            </NavbarItem>
-        </StyledNavbar>
-    );
-}
+  const categoriesList = categories.map((category, index) => {
+    if (index < 6) {
+      return (
+        <NavbarItem key={category.category_name}>
+          <LinkItem
+            href={`/${category.category_name}`}
+            linkText={category.category_name}
+          />
+        </NavbarItem>
+      );
+    } else {
+      dropDownCategories.push(category);
+    }
+  });
+
+  return (
+    <StyledNavbar>
+      {categoriesList}
+      <NavbarItem isDropdown>
+        <DropdownButton
+          dropdownText="More"
+          dropDownCategories={dropDownCategories}
+        />
+      </NavbarItem>
+    </StyledNavbar>
+  );
+};
 
 const StyledNavbar = styled.ul`
   display: flex;
@@ -46,7 +52,8 @@ const NavbarItem = styled.li`
   display: flex;
   align-items: center;
   padding: 0 8px;
-  position: ${props => props.isDropdown && "relative"};
+  position: ${(props) => props.isDropdown && "relative"};
+  text-transform: capitalize;
 `;
 
 export default Navbar;

@@ -1,17 +1,17 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import UploadButton from "./UploadButton";
 
 export default function Header() {
-    return (
-        <StyledHeader>
-            <Logo/>
-            <Navbar />
-            <UploadButton />
-        </StyledHeader>
-    );
+  return (
+    <StyledHeader>
+      <Logo />
+      <Navbar />
+      <UploadButton />
+    </StyledHeader>
+  );
 }
 
 const StyledHeader = styled.div`
