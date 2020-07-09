@@ -6,7 +6,7 @@ import SectionLayout from "../components/SectionLayout";
 import CategorySection from "../components/CategorySection";
 
 import { MOST_POPULAR_RESOURCES_BY_CATEGORY } from "../constants/dataContants";
-import { HOST_URL } from "../constants/urls";
+import { API_SERVER_URL } from "../constants/urls";
 import { backgroundColorGenerator } from "../helpers/utils";
 
 const Index = ({ categories }) => {
@@ -41,7 +41,7 @@ const Index = ({ categories }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(`${HOST_URL}/api/categories`);
+  const res = await fetch(`${API_SERVER_URL}/api/categories`);
   const categories = await res.json();
   return { props: { categories } };
 }
