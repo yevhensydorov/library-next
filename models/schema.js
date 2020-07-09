@@ -13,12 +13,16 @@ class Resources extends Model {
 
   static get relationMappings() {
     return {
-      resources_categories: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: ResourcesCategories,
+      categories: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Categories,
         join: {
           from: "resources.id",
-          to: "resources_categories.resource_id",
+          through: {
+            from: "resources_categories.resource_id",
+            to: "resources_categories.category_id",
+          },
+          to: "categories.id",
         },
       },
     };
