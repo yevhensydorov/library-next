@@ -5,13 +5,13 @@ import MainContentContainer from "../components/MainContentContainer";
 import SectionLayout from "../components/SectionLayout";
 import CategorySection from "../components/CategorySection";
 
-import { MOST_POPULAR_RESOURCES_BY_CATEGORY } from "../constants/dataContants";
 import { API_SERVER_URL } from "../constants/urls";
 import { backgroundColorGenerator } from "../helpers/utils";
 
-const Index = ({ categories }) => {
-  const renderCategoriesSections = MOST_POPULAR_RESOURCES_BY_CATEGORY.map(
-    (category, index) => {
+const Index = ({ categories, featuredResources }) => {
+  let renderCategoriesSections = null;
+  if (featuredResources.length > 0) {
+    renderCategoriesSections = featuredResources.map((category, index) => {
       return (
         <SectionLayout
           bcg={backgroundColorGenerator(index)}
@@ -23,8 +23,8 @@ const Index = ({ categories }) => {
           />
         </SectionLayout>
       );
-    }
-  );
+    });
+  } else return null;
 
   return (
     <CategoriesContext.Provider value={{ categories }}>
@@ -41,9 +41,14 @@ const Index = ({ categories }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(`${API_SERVER_URL}/api/categories`);
-  const categories = await res.json();
-  return { props: { categories } };
+  const categoriesRes = await fetch(`${API_SERVER_URL}/api/categories`);
+  const featuredRes = await fetch(
+    `${API_SERVER_URL}/api/resources/feautured-resources`
+  );
+
+  const categories = await categoriesRes.json();
+  const featuredResources = await featuredRes.json();
+  return { props: { categories, featuredResources } };
 }
 
 export default Index;

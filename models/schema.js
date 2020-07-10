@@ -75,4 +75,32 @@ class ResourcesCategories extends Model {
   }
 }
 
-module.exports = { Resources, Categories, ResourcesCategories };
+class CategoriesWithResourcesList extends Model {
+  static get tableName() {
+    return "categories";
+  }
+
+  static get relationMappings() {
+    return {
+      resources: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Resources,
+        join: {
+          from: "categories.id",
+          through: {
+            from: "resources_categories.category_id",
+            to: "resources_categories.resource_id",
+          },
+          to: "resources.id",
+        },
+      },
+    };
+  }
+}
+
+module.exports = {
+  Resources,
+  Categories,
+  ResourcesCategories,
+  CategoriesWithResourcesList,
+};
