@@ -6,7 +6,7 @@ const NavbarDropdownMenu = ({ dropDownCategories }) => {
     return (
       <li key={category.category_name}>
         <LinkItem
-          href={`/${category.category_name}`}
+          href={`resources/${category.category_name}`}
           linkText={category.category_name}
           isDropdownItem
         />
